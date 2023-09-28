@@ -1,0 +1,57 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block metadescription %}
+ 
+        {{product.desc | truncatewords:155}}
+ 
+        welcome to ABC store where you can buys different items ...
+
+{% endblock %}
+
+
+
+
+{% block title %}
+    {% if catogery %}
+        {{product.name}}
+   
+    {% endif %}
+{% endblock %}
+{% block content %}
+<div class="row my_product_row_class">
+    <div class="mx_auto">
+        <p><a href="{% url 'ecommerce_app:allProdCat' %}">Home</a> | 
+            <a href="{{product.catogery.get_url}}" >{{product.name}}</a>|
+            {{product.name}}</p>
+    </div>
+
+</div >
+<div class="container">
+
+<br>
+
+<div class="row"> 
+    <div class=" col-12 col-sm-12 col-md-12 col-lg-6 text-center">
+         <div style="min-width: 18rem;">
+            <img src="{{product.image.url}}" style="width: 300px; height:300px"  alt="{{product.name}}">
+
+        </div>
+    </div>
+
+        <div class="col-12 col-sm-12 col-md-12 col-lg-6">
+            <div>
+
+            
+            <h1 class="my_product_title">{{product.name}}</h1>
+            <p>${{product.price}}</p>
+            <p class="my_title">product discription</p>
+            <p class="text-jestify my_pro_text">{{product.desc}}</p>
+
+            {% if product.stock <= 0 %}
+                <p><b>Out of stock</b></p>
+            {% else %}
+                <a class="btn btn-secondary" href="{% url 'cart:add' product.id %}">Add to cart</a>
+            {% endif %}
+        </div> </div></div></div>
+
+{% endblock %}
