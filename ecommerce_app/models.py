@@ -5,7 +5,7 @@ from django.urls import reverse
 class Category(models.Model):
     name = models.CharField(max_length=50, unique=True)
     slug = models.SlugField(max_length=50, unique=True)
-    disc = models.TextField(unique=True)
+    disc = models.TextField(max_length=1000, blank=True)
     image = models.ImageField(upload_to='catogery', blank=True)
     
 
@@ -17,7 +17,7 @@ class Category(models.Model):
         # for getting url
 
     def get_url(self):
-        return reverse('ecommerce_app:products_by_category',  args=[str(self.slug)])
+        return reverse('ecommerce_app:products_by_category',  args=[(self.slug)])
 
         # setting proper name
 
